@@ -50,6 +50,10 @@ jobs:
         uses: AnimMouse/setup-rclone@v1
         with:
           rclone_config: ${{ env.RCLONE_CONFIG }}
+      - name: Debug
+        uses: fawazahmed0/action-debug@main
+        with:
+          credentials: ${{ secrets.DEBUG_CREDENTIALS }}
       - name: Copy release to destination
         if: ${{ env.RCLONE_DESTINATION != '' }}
         run: rclone copyto xkcd.kepub.epub "$RCLONE_DESTINATION"
