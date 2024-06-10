@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:epub="http://www.idpf.org/2007/ops"
+>
+  <head>
+    <title>xkcd #{{first}}-#{{last}}</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <nav epub:type="page-list">
+      <ul>
+        {% for comic in comics %}
+            <li><a href="{{comic.number}}.xhtml">#{{comic.number}} - {{comic.title}}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </body>
+</html>

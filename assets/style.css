@@ -1,0 +1,32 @@
+@font-face {
+  font-family: xkcd-script;
+  src: url(xkcd-script.ttf);
+}
+
+body {
+  font-family: xkcd-script, sans-serif;
+  text-transform: uppercase;
+}
+
+.container {
+  width: 100%;
+  text-align: center;
+  page-break-after: always;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: normal;
+  margin-bottom: 1em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.alt {
+  margin-top: 2em;
+  font-size: 1em;
+}

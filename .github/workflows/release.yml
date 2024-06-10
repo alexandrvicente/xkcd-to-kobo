@@ -1,0 +1,45 @@
+name: Create new release
+on:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      RCLONE_CONFIG: ${{ secrets.RCLONE_CONFIG }}
+      RCLONE_DESTINATION: ${{ secrets.RCLONE_DESTINATION }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Restore cached comics
+        uses: actions/cache/restore@v4
+        with:
+          path: cache
+          key: comics-cache
+      - name: Create new kepub
+        run: python xkcd-to-kobo.py
+      - name: Save cached comics
+        uses: actions/cache/save@v4
+        with:
+          path: cache
+          key: comics-cache
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          name: "Last 300 xkcd comics"
+          artifacts: "xkcd.kepub.epub"
+      - name: Setup Rclone
+        if: ${{ env.RCLONE_CONFIG != '' }}
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: ${{ env.RCLONE_CONFIG }}
+      - name: Copy release to destination
+        if: ${{ env.RCLONE_DESTINATION != '' }}
+        run: rclone copyto xkcd.kepub.epub ${{ env.RCLONE_DESTINATION }}
