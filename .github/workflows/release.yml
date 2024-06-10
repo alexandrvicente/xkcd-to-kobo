@@ -44,6 +44,7 @@ jobs:
           tag: latest
           name: "Last 300 xkcd comics"
           artifacts: "xkcd.kepub.epub"
+          allowUpdates: true
       - name: Setup Rclone
         if: ${{ env.RCLONE_CONFIG != '' }}
         uses: AnimMouse/setup-rclone@v1
