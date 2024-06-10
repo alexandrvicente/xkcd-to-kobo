@@ -51,4 +51,4 @@ jobs:
           rclone_config: ${{ env.RCLONE_CONFIG }}
       - name: Copy release to destination
         if: ${{ env.RCLONE_DESTINATION != '' }}
-        run: rclone copyto xkcd.kepub.epub ${{ env.RCLONE_DESTINATION }}
+        run: rclone copyto xkcd.kepub.epub "$RCLONE_DESTINATION"
