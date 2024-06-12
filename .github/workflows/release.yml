@@ -1,4 +1,4 @@
-name: Create new release
+name: Create new release on xkcd.com update
 on:
   schedule:
     - cron: "0 * * * *"
